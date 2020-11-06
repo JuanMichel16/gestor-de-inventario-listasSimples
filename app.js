@@ -1,3 +1,4 @@
+import Producto from './producto.js';
 import UI from './ui.js'
 
 const ui = new UI();
@@ -27,7 +28,7 @@ function validarDatos(e) {
     } else if( isNaN(costo) || costo <=0){
         ui.mostrarMensaje('Revise que se hayan llenado todos los espacios correctamente', 'error');
     } else {
-        console.log('El producto se ha creado correctamente');
+        const producto = new Producto(codigo, nombre, descripcion, cantidad, costo);
     }
 
 
