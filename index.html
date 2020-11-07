@@ -10,10 +10,7 @@
     <h1>Gestor de Almacen</h1>
 
     <div class="container">
-        <form id="formulario-agregar" action="#">
-            <header>
                 <h2>Agregar nuevo articulo</h2>
-            </header>
             <div>
                 <label for="codigo">Código del artículo:</label>
                 <input id="codigo" type="text">
@@ -35,21 +32,19 @@
                 <input id="costo" type="text">
             </div>
 
-            <button type="submit" class="btn-primary">Agregar al final</button>
-            <button type="submit" class="btn-primary">Agregar al inicio</button>
+            <button id='agregar' class="btn-primary">Agregar al final</button>
+            <button id='agregarInicio' class="btn-primary">Agregar al inicio</button>
             <div>
                 <label for="posicion">Elige la posicion en la cual deseas insertar el producto:</label>
                 <input id="posicion" type="text">
             </div>
 
-            <button type="submit" class="btn-primary">Agregar en una posicion</button>
-        </form>
+            <button id='agregarPosicion' class="btn-primary">Agregar en una posicion</button>
 
         <div id="mensaje1">
         </div>
     </div>
     <div class="container">
-        <form action="#" id="formulario-borrar">
             <header>
                 <h2>Eliminar articulo</h2>
             </header>
@@ -58,9 +53,8 @@
                 <input id="codigoBorrar" type="text">
             </div>
 
-            <button type="submit" class="btn-primary">Eliminar</button>
-            <button type="submit" class="btn-primary">Eliminar el primer articulo</button>
-        </form>
+            <button id="btnEliminarProducto" class="btn-primary">Eliminar</button>
+            <button id="btnBorrarPrimerProducto" class="btn-primary">Eliminar el primer articulo</button>
     </div>
     <div class="container">
         <form action="#" id="formulario-buscar">

@@ -1,7 +1,7 @@
 export default class Producto {
     /**
      * 
-     * @param {number} codigo 
+     * @param {string} codigo 
      * @param {string} nombre 
      * @param {string} descripcion 
      * @param {number} cantidad 
@@ -12,7 +12,16 @@ export default class Producto {
         this._nombre = nombre;
         this._descripcion = descripcion;
         this._cantidad = cantidad;
-        this._costo = costo;        
+        this._costo = costo;
+        this._siguiente = null;  
+    }
+
+    get anterior() {
+        return this._anterior
+    }
+
+    get siguiente() {
+        return this._siguiente
     }
 
     get codigo() {
