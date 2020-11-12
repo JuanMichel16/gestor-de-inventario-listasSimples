@@ -6,9 +6,9 @@ export default class Inventario {
 
     agregarProductoInicio(nuevoProducto) {
 
-        console.log(nuevoProducto);
         if(this.inicio === null) {
             this.inicio = nuevoProducto
+
         } else {
             nuevoProducto.siguiente = this.inicio;
             this.inicio = nuevoProducto;
@@ -57,20 +57,25 @@ export default class Inventario {
 
     eliminarProducto(codigo) {
         let elementoBorrado;
+        let aux = this.inicio;
 
-        if(this.inicio.codigo === codigo) {
-            this.inicio = this.inicio.siguiente
+        if(aux.codigo === codigo) {
+            elementoBorrado = aux;
+            this.inicio = aux.siguiente
+
+            return elementoBorrado;
         } else {
-            let aux = this.inicio;
-
-            while(aux.siguiente.codigo !== codigo) {
+            //Profe aca ya no supe hacer la validacion para darle como siguiente un null a un producto que era el antepenultimo del que borre.
+            aux = aux.siguiente;
+            while(aux.codigo !== codigo) {
                 aux = aux.siguiente;
             }
-            elementoBorrado = aux.siguiente;
-            aux.siguiente = aux.siguiente.siguiente
-        }
 
-        return elementoBorrado;
+            elementoBorrado = aux
+            aux.siguiente = aux.siguiente.siguiente;
+
+            return elementoBorrado;
+        }
     }
 
     eliminarPrimerProducto() {
@@ -97,6 +102,21 @@ export default class Inventario {
             aux = aux.siguiente;
         }
 
-        return aux
+        return aux;
+    }
+
+
+    listarProductos() {
+        let aux = this.inicio;
+
+        if(aux.siguiente === null) {
+            console.log(aux);
+        } else {
+
+            while(aux.siguiente !== null) {
+                aux = aux.siguiente;
+                console.log(aux)
+            }
+        }
     }
 }

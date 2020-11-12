@@ -1,17 +1,12 @@
 export default class UI {
     constructor() {}
 
-    mostrarMensaje(mensaje, tipo) {
-        const lugarMensaje = document.querySelector('#mensaje1');
-        const divMensaje = document.createElement('div');
+    mostrarMensaje(mensaje) {
+        const lugarMensaje = document.querySelector('#acciones');
 
-        if(tipo === 'error') {
-            divMensaje.classList.add('error');
-        } else {
-            divMensaje.classList.add('correcto');
-        }
-
+        let divMensaje = document.createElement('div');
         divMensaje.textContent = mensaje;
+
         lugarMensaje.appendChild(divMensaje);
     }
 }

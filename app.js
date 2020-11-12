@@ -22,14 +22,14 @@ btnBorrarPrimerProducto.addEventListener('click', borrarPrimerProducto);
 btnBorrarProducto.addEventListener('click', borrarArticulo);
 formularioBuscar.addEventListener('submit', buscarProducto);
 btnListarProductos.addEventListener('click', listarProductos);
-btnListarProductosInvertido.addEventListener('click', listarProductosInvertido);
+// btnListarProductosInvertido.addEventListener('click', listarProductosInvertido);
 
-function listarProductosInvertido() {
-    validarDatos();
-}
-function listarProductos() {
-    validarDatos();
-}
+// function listarProductosInvertido() {
+//     validarDatos();
+// }
+// function listarProductos() {
+//     validarDatos();
+// }
 
 
 function agregarProductoPosicion() {
@@ -37,11 +37,12 @@ function agregarProductoPosicion() {
     const posicion = document.querySelector('#posicion').value;
 
     inventario.agregarProductoPosicion(producto, posicion);
+
+    ui.mostrarMensaje('El producto se ha agregado correectamente');
 }
 
 
 function validarDatos() {
-
     const codigo = document.querySelector('#codigo').value
     const nombre = document.querySelector('#nombre').value
     const descripcion = document.querySelector('#descripcion').value
@@ -51,47 +52,81 @@ function validarDatos() {
 
     if(codigo === '' || nombre === '' || descripcion === '' || cantidad === '' || costo === '') {
         ui.mostrarMensaje('todos los espacios deben estar llenos', 'error');
+
+
+        return;
     } else if( isNaN(cantidad) || cantidad <= 0 ) {
         ui.mostrarMensaje('Revise que se hayan llenado todos los espacios correctamente', 'error');
-    } else if( isNaN(costo) || costo <=0){
+
+        return;
+    } else if( isNaN(costo) || costo <= 0){
         ui.mostrarMensaje('Revise que se hayan llenado todos los espacios correctamente', 'error');
+
+        return;
     } else {
         const producto = new Producto(codigo, nombre, descripcion, cantidad, costo);
 
-        return producto
+        return producto;
     }
+
 }
 
 function agregarProductoInicio() {
     let producto = validarDatos();
 
-    inventario.agregarProductoInicio(producto);
+    //Si el producto existe, lo va agregar!
+    if(producto) {
+        inventario.agregarProductoInicio(producto);
+        ui.mostrarMensaje(`El articulo: ${producto.nombre}, con codigo ${producto.codigo} se ha agregado correctamente al inventario.`)
+        console.log(inventario);
+    };
+
 }
 
 
 function agregarProductoFinal() {
     let producto = validarDatos();
 
-    inventario.agregarProducto(producto);
-    ui.mostrarMensaje('El articulo se ha agregado correctamente al inventario.', 'correcto')
-    console.log(inventario);
+    //Si el producto existe, lo va agregar!
+    if(producto) {
+        inventario.agregarProducto(producto);
+        ui.mostrarMensaje(`El articulo: ${producto.nombre}, con codigo ${producto.codigo} se ha agregado correctamente al inventario.`)
+        console.log(inventario);
+    };
 }
 
 function borrarPrimerProducto() {
     let productoEliminado = inventario.eliminarPrimerProducto();
+    ui.mostrarMensaje(`Se ha eliminado con exito el producto ${productoEliminado.nombre}, con codigo ${productoEliminado.codigo}`);
 
+    return;
 }
 
 function borrarArticulo(e) {
     e.preventDefault();
 
     const articulo = document.getElementById('codigoBorrar').value;
-    console.log(inventario.eliminarProducto(articulo));
+    let productoEliminado = inventario.eliminarProducto(articulo);
+
+    console.log(productoEliminado);
+
+    ui.mostrarMensaje(`Se ha eliminado con exito el producto ${productoEliminado.nombre} con codigo ${productoEliminado.codigo}`);
 }
 
 function buscarProducto(e) {
     e.preventDefault();
 
-    const articulo = Number(document.getElementById('codigoBuscar').value);
-    console.log(inventario.buscarProducto(articulo));
+    const codigo = document.getElementById('codigoBuscar').value;
+    let articuloEncontrado = inventario.buscarProducto(codigo);
+    
+    const {nombre} = articuloEncontrado;
+
+    ui.mostrarMensaje(`Se ha encontrado con exito ${nombre} con codigo ${codigo}`)
+
+
+}
+
+
+function listarProductos() {
+    inventario.listarProductos();
 }
