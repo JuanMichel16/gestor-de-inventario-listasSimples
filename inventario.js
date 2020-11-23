@@ -66,6 +66,8 @@ export default class Inventario {
             return elementoBorrado;
         } else {
             //Profe aca ya no supe hacer la validacion para darle como siguiente un null a un producto que era el antepenultimo del que borre.
+            //Como ya sabes que no es el primero puedes checar si hay uno despues y preguntar si es el siguiente el que quieres borrar
+            //al final lo que estamos buscando es el anterior al que queremos borrar
             aux = aux.siguiente;
             while(aux.codigo !== codigo) {
                 aux = aux.siguiente;
@@ -98,11 +100,11 @@ export default class Inventario {
     buscarProducto(codigo) {
         let aux = this.inicio;
 
-        while(aux.codigo !== codigo) {
+        while(aux.codigo !== codigo) {  // aqui puedes preguntar si aux es null antes (lo cual indica que no existe)
             aux = aux.siguiente;
         }
 
-        return aux;
+        return aux; //hasta ahorita siempre devuelves un objeto aun cuando no exista nada
     }
 
 
